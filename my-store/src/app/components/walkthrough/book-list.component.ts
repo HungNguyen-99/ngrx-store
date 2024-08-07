@@ -7,7 +7,7 @@ import { Book } from './models/book.model';
   template: `
     <div class="book-item" *ngFor="let book of books">
       <p>{{ book.volumeInfo.title }}</p>
-      <span> by {{ book.volumeInfo.authors }}</span>
+      <span> by {{ book.volumeInfo.authors }}</span> -- 
       <button (click)="add.emit(book.id)" data-test="add-button">
         Add to Collection
       </button>
