@@ -1,19 +1,25 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { MoviesService } from './movies.service';
 import { moviesAction } from './state/movie.action';
+import { selectDataMovies } from './state/movies.selector';
 
 @Component({
   selector: 'app-overview-effect',
-  template: ` <h1>Overview Effect</h1> `,
+  template: ` 
+    @for (item of movies$ | async; track $index) {
+      <p>{{ item }}</p>
+    }
+  `,
   standalone: true,
+  imports: [AsyncPipe]
 })
 export class OverviewEffectComponent {
   private store = inject(Store);
 
+  movies$ = this.store.select(selectDataMovies);
+
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-    // this.store.dispatch(moviesAction.retrievedMovieList({ movies: [] }));
+    this.store.dispatch(moviesAction.retrievedMovieList());
   }
 }

@@ -1,10 +1,24 @@
-import { createReducer } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
+import { moviesAction } from './movie.action';
 
-const initialState: ReadonlyArray<string> = [];
+export interface MoviesState {
+    data: ReadonlyArray<string>;
+    status: string;
+}
 
-// export const moviewsReducer = createReducer(
-//     initialState,
-//     on(
+const initialState: MoviesState = {
+    data: [],
+    status: 'loading',
+};
 
-//     )
-// )
+export const moviewsReducer = createReducer(
+    initialState,
+    on(
+        moviesAction.moviesLoadedSuccess,
+        (state, { movies }) => ({ ...state, data: movies, status: 'success' })
+    ),
+    on(
+        moviesAction.moviesLoadedError,
+        (state, { error }) => ({ ...state, status: 'error', error })
+    )
+)

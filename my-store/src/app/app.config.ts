@@ -7,18 +7,24 @@ import { provideRouter } from '@angular/router';
 
 import { provideHttpClient } from '@angular/common/http';
 import { provideClientHydration } from '@angular/platform-browser';
+import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { routes } from './app.routes';
+import { MoviesEffects } from './components/overview-effect/state/moview.effect';
+import { moviewsReducer } from './components/overview-effect/state/moview.reduce';
 import { booksReducer } from './components/walkthrough/state/reduces/book.reduce';
 import { collectionReducer } from './components/walkthrough/state/reduces/collection.reducer';
-import { provideEffects } from '@ngrx/effects';
-import { MoviesEffects } from './components/overview-effect/state/moview.effect';
 
 const APP_STORE = {
   books: booksReducer,
   collection: collectionReducer,
+  movies: moviewsReducer,
 };
+
+const EFFECTS = [
+  MoviesEffects
+]
 
 const CONFIG_STORE_DEV_TOOL = {
   maxAge: 25, // Retains last 25 states
@@ -36,9 +42,8 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     provideStore(),
     provideHttpClient(),
-    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideStore(APP_STORE),
     provideStoreDevtools(CONFIG_STORE_DEV_TOOL),
-    provideEffects(MoviesEffects),
+    provideEffects(EFFECTS),
   ],
 };
