@@ -8,4 +8,11 @@ export const routes: Routes = [
         (m) => m.WalkthroughComponent
       ),
   },
+  {
+    path: 'app-overview-effect',
+    loadComponent: () =>
+      import('./components/overview-effect/overview-effect.component').then(
+        (m) => m.OverviewEffectComponent
+      ),
+  },
 ];
