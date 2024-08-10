@@ -2,8 +2,8 @@ import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DebounceStoreComponent } from './debounce-store.component';
-import { DebounceStore } from './debounce-store.service';
-import { MoviesState, MoviesStore } from './movie-store.service';
+import { DebounceStore } from './store-component/debounce-store.service';
+import { MoviesState, MoviesStore } from './services/movie-store.service';
 
 @Component({
   selector: 'read-component',
@@ -25,7 +25,7 @@ import { MoviesState, MoviesStore } from './movie-store.service';
     @for(item of vm.userPreferredMovies; track $index) {
     <li>{{ item.name }}</li>
     } }
-    <debounce-store></debounce-store>
+    <debounce-store />
   `,
   standalone: true,
   imports: [AsyncPipe, DebounceStoreComponent],
