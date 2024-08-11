@@ -17,7 +17,7 @@ export interface MovieDebounceState {
 export class DebounceStore extends ComponentStore<MovieDebounceState> {
   private readonly movieService = inject(MovieService);
   constructor() {
-    super({ movies: [], moviesPerPage: 5, currentPageIndex: 0, length: 0 });
+    super({ movies: [], moviesPerPage: 5, currentPageIndex: 1, length: 0 });
     this.fetchLength();
     this.fetchNovies(this.fetchMoviesData$);
   }

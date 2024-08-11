@@ -3,7 +3,10 @@ import { Component, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DebounceStoreComponent } from './debounce-store.component';
 import { DebounceStore } from './store-component/debounce-store.service';
-import { MoviesState, MoviesStore } from './services/movie-store.service';
+import {
+  MoviesState,
+  MoviesStore,
+} from './store-component/movie-store.service';
 
 @Component({
   selector: 'read-component',
@@ -33,6 +36,5 @@ import { MoviesState, MoviesStore } from './services/movie-store.service';
 })
 export class ReadComponent {
   private readonly moviesStore = inject(MoviesStore);
-  private readonly debounceStore = inject(DebounceStore);
   vm$: Observable<MoviesState> = this.moviesStore.vm$;
 }
